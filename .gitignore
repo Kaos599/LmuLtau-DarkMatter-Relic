@@ -1,0 +1,18 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# micrOMEGAs / CalcHEP compilation artifacts
+*.o
+*.a
+calc_relic
+dNdE.exe
+scan_data_mchi_*.txt
+scan_data.txt
+results/
+tmp/

@@ -1,0 +1,51 @@
+(* FeynRules Model File for U(1)_{L_mu - L_tau} with Dirac Dark Matter *)
+
+M$ModelName = "LmuLtauDM";
+
+M$Information = {
+  Authors      -> {"AI Assistant"},
+  Version      -> "1.0",
+  Date         -> "2024"
+};
+
+(* Note: It is assumed this file is loaded alongside SM.fr *)
+
+M$Parameters = {
+  gp == {
+    ParameterType    -> External,
+    Value            -> 10^-3,
+    InteractionOrder -> {QED, 1},
+    TeX              -> g^\[Prime],
+    Description      -> "U(1) Lmu-Ltau gauge coupling"
+  }
+};
+
+M$ClassesDescription = {
+  V[5] == {
+    ClassName       -> Zp,
+    SelfConjugate   -> True,
+    Mass            -> {MZp, 10.},
+    Width           -> {WZp, Auto},
+    ParticleName    -> "Zp",
+    PDG             -> 32
+  },
+  F[7] == {
+    ClassName       -> chi,
+    SelfConjugate   -> False,
+    Mass            -> {Mchi, 5.},
+    Width           -> 0,
+    ParticleName    -> "~chi",
+    AntiParticleName-> "~chi~",
+    PDG             -> 52
+  }
+};
+
+LNP := gp * Zp[mu] * (
+    bar[l[2]].Ga[mu].l[2] 
+  - bar[l[3]].Ga[mu].l[3] 
+  + bar[vl[2]].Ga[mu].ProjM.vl[2] 
+  - bar[vl[3]].Ga[mu].ProjM.vl[3] 
+  + bar[chi].Ga[mu].chi
+);
+
+LTot := LSM + LNP;
